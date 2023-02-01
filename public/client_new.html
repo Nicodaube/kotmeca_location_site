@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="navbar_button.js" defer></script>
+
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <title>Kot Méca Location</title>
+        <link rel="stylesheet" href="Main_style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    </head>
+
+    <!-- Page body -->
+    <body class ="client_bg common_bg">
+
+        <!-- Upper Navigation bar -->
+        <header id="navbar" class= "primary-header flex">
+            <div>
+                <a href="/home">
+                    <img class="logo" src="./assets/meca_logo.png" alt="">
+                </a>
+            </div>
+
+            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false"></button>
+            <nav>
+                <ul id="primary-navigation" data-visible="false" class="primary-navigation flex">
+                    <li>
+                        <a class="text-darkblue font-merriweather font-nav" class="active" href="/home"> Accueil </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="loca_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Locations</a>
+                        <div id="loca_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/rental_list">Toutes les locations</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/rental_new">Nouvelle location</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="loc_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Locataires</a>
+                        <div class="dropdown_content" id="loc_dropable" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/client">Informations locataires</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/client_new">Nouveau client</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="inventory_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Inventaire</a>
+                        <div id="inventory_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/inventory_list">Listes d'outils</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/inventory_modify">Modifier</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="tools_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Outils</a>
+                        <div id="tools_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/info_members"> Info membres</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/tool_members">Gestion membres</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/credits"> Crédits</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <form action="/Research_client_new" method="post" class="flex search_bar">
+            <input type="recherche" placeholder="Recherche" id="search"name="search">
+            <button class="button-blue button-free" type="submit">Rechercher</button>
+        </form>
+
+
+        <form action="/new_client" method="post">
+                <div class= "text-content bg-text font-merriweather position-relative center-box">
+                    <h1>Nouveau Locataire</h1>
+
+                    <label for="Prenom">Prenom :</label>
+                    <input type="text" id="Prenom" name="Prenom">
+
+                    <br/>
+
+                    
+                    <label class="align-left-19" for="Nom">Nom :</label>
+                    <input type="text" id="Nom" name="Nom">
+
+                    {{#locataire_exist}}
+                            <b>Nom de l'utilisateur n'existe pas</b>
+                    {{/locataire_exist}}
+                    <br/>
+
+                    <label class="align-left-19" for="GSM">GSM :</label>
+                    <input type="text" id="GSM" name="GSM">
+
+                    <br/>
+
+
+                    <label class="align-left-19" for="Mail">Mail :</label>
+                    <input type="text" id="Mail" name="Mail" >
+                    <br/>
+
+                    <label class="align-left-08" for="Group">Group :</label>
+                    <input type="text" id="Group" name="Group" >
+                    <br/>
+                    
+                    <!--
+                    <label for="genre"> Genre :</label>
+                    <select name="genre" id="genre" genre="non-binaire">
+                        <option value="non-binaire">   </option>
+                        <option value="male">Homme</option>
+                        <option value="femelle">Femme</option>
+                    </select>
+                    <br>
+
+                    
+                    <div class="male" male-visible="false">
+                        <label for="penis"> Taille du sexe :</label>
+                        <input type="text" id="penis" name="penis">
+                        <br>
+
+                        <label for="penis_color">Couleur du chibre :</label>
+                        <input type="text" id="penis_color" name="penis_color">
+                        <br>
+
+                        <label for="penis_weight">Masse du zob:</label>
+                        <input type="text" id="penis_weight" name="penis_weight">
+                        <br>
+
+                        <input type="checkbox" id="puceau" name="puceau">
+                        <label for="puceau">C'est un gros puceau, chaud lui peter la rondelle</label>
+                        <br>
+
+                        <input type="checkbox" id="sperme" name="sperme">
+                        <label for="sperme"> C'est un mâle fort et puissant, je m'en vais lui ponctionner sa semence pour créer de bon descendants</label>
+                        <br>
+
+                    </div>
+
+                    <div class="femelle" femelle-visible="false">
+                        <label for="seins"> Taille du bonnet :</label>
+                        <input type="text" id="seins" name="seins">
+                        <br>
+
+                        <label for="regles">Date de menstruations:</label>
+                        <input type="text" id="regles" name="regles">
+                        <br>
+
+                        <label for="bonne">Bonne /10:</label>
+                        <input type="text" id="bonne" name="bonne">
+                        <br>
+
+                        <input type="checkbox" id="sexe" name="sexe">
+                        <label for="sexe">Elle veut du sexe, je l'emmene dans ma chambre après la location</label>
+                        <br>
+
+                        <input type="checkbox" id="riche" name="riche">
+                        <label for="riche"> elle est riche, go la marier</label>
+                        <br>
+                        
+                    </div>
+                -->
+
+                    <button class="button-blue  button" type="submit">Ajouter</button>
+                </div>
+        </form>
+
+        <table class="bg-text position-relative center-box">
+                <tr class="column_titles">
+                    <th> Supprimer         </th>
+                    <th> Nom               </th>
+                    <th> Prenom            </th>
+                    
+                </tr>
+                    {{#client_list}}
+                            <tr>
+                                <td  class="center">
+                                    <form action="/delete_client" method="post">
+                                            <button type="submit" class="button-blue add-button" name = "{{surname}}"><span>Supprimer</span></button>
+                                    </form>
+                                </td>
+                                <td> {{surname}}         </td>
+                                <td> {{firstname}}       </td>
+                                
+
+                            </tr> 
+                    {{/client_list}}
+            </table>
+</body>
+
+</html>

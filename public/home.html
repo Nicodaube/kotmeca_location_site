@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="navbar_button.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <title>Kot Méca Location</title>
+        <link rel="stylesheet" href="Main_style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    </head>
+
+    <!-- Page body -->
+    <body class ="home_bg common_bg">
+
+        <!-- Upper Navigation bar -->
+        <header id="navbar" class= "primary-header flex">
+            <div>
+                <a href="/home">
+                    <img class="logo" src="./assets/meca_logo.png" alt="">
+                </a>
+            </div>
+
+            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false"></button>
+            <nav>
+                <ul id="primary-navigation" data-visible="false" class="primary-navigation flex">
+                    <li>
+                        <a class="text-darkblue font-merriweather font-nav" class="active" href="/home"> Accueil </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="loca_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Locations</a>
+                        <div id="loca_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/rental_list">Toutes les locations</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/rental_new">Nouvelle location</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="loc_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Locataires</a>
+                        <div class="dropdown_content" id="loc_dropable" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/client">Informations locataires</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/client_new">Nouveau client</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="inventory_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Inventaire</a>
+                        <div id="inventory_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/inventory_list">Listes d'outils</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/inventory_modify">Modifier</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="tools_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Outils</a>
+                        <div id="tools_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/info_members"> Info membres</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/tool_members">Gestion membres</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/credits"> Crédits</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        
+
+        <div class="text-content bg-text font-merriweather position-relative center-box bg-interne" style="margin-top: 5rem;">
+            <h1>Membre du mois</h1>
+            <p>L'interne du mois est : {{name}} avec un score de {{score}}, bravo machine</p>
+            <img src="./uploads/{{pdp}}" class="image_credits" alt="">
+        </div>
+
+        {{#late_true}}
+
+            <div class="text-content bg-text font-merriweather position-relative center-box" style="margin-top: 5rem;">
+
+
+                <h1> Attention, les petits boulons ! Ces locations sont sorties il y a plus de 2 semaines ...</h1>
+
+                <img class="attention_pouce" src="./assets/attention.png" alt="Attention">
+
+                <table class="bg-text position-relative center-box">
+                    <tr class="column_titles">
+                        <th> Locataire         </th>
+                        <th> Outils            </th>
+                        <th> Membre            </th>
+                        <th> Date              </th>
+                    </tr>
+
+                    {{#late_locations}}
+                                    <tr>
+                                        <td> {{name}}        </td>
+                                        <td> {{tool}}        </td>
+                                        <td> {{member}}      </td>
+                                        <td> {{date}}        </td>
+                                    </tr> 
+                    
+                    {{/late_locations}}
+                </table>
+            </div>
+
+        {{/late_true}}
+
+        {{#Alternate_message}}
+
+            <div class="text-content bg-text font-merriweather position-relative center-box" style="margin-top: 5rem;">
+
+                
+
+                <h1> Waw pas de location en retard ...</h1>
+
+                <img class="attention_pouce" src="./assets/Pouce.png" alt="Attention">
+
+
+            </div>
+
+        {{/Alternate_message}}
+
+        <div class="text-content bg-text font-merriweather position-relative center-box" style="margin-top: 5rem;">
+
+            <h1>Statistiques des Locations</h1>
+            <p>Depuis le début du quadrimestre, les locations ont générées {{q_total}} € de bénéfices</p>
+            <p>Depuis le début du mois, les locations ont générées {{month_total}} € de bénéfices</p>
+            <p>Par rapport au mois passé, cela représente {{revenue_change}}% de différence</p>
+            
+            <div class="chart">
+
+                <canvas id="myChart" width="200" height="200"></canvas>
+                <script>
+                Chart.defaults.interaction.mode = 'nearest';
+
+                const ctx = document.getElementById('myChart').getContext('2d');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["septembre Q1","octobre Q1", "novembre Q1", "decembre Q1", "janvier Q2", "fevrier Q2", "mars Q2", "avril Q2", "mai Q2", "juin Q2"],
+                        datasets: [{
+                            label: "Euro (€)",
+                            data: [ {{data}} ] ,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)',
+                                'rgba(153, 102, 255, 0.5)',
+                                'rgba(255, 159, 64, 0.5)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1,
+                        }]
+                    },
+                    
+                    options: {
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    // This more specific font property overrides the global property
+                                    font: {
+                                        size: 18
+                                    },
+                                    color: "#ffffff",
+                                },
+                            },
+                         },
+                        scales: {
+                            y: {
+                                ticks: {
+                                    color: "#ffffff",
+                                    beginAtZero: true,
+                                },
+                            },
+                            x: {
+                                ticks: {
+                                    color: "#ffffff",
+                                    beginAtZero: true
+                                }
+                            },
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,  
+                    }
+                });
+                </script>
+            </div>
+        </div>
+
+
+        <a href="https://www.youtube.com/watch?v=ynDmiMoAUzQ&ab_channel=G%C3%A9n%C3%A9rationClubDo"> Nu </a>
+
+        
+    </body>
+
+</html>
+
+
+
+

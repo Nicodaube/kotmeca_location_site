@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="navbar_button.js" defer></script>
+
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <title>Kot Méca Location</title>
+        <link rel="stylesheet" href="Main_style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    </head>
+
+    <!-- Page body -->
+    <body class ="rental_bg common_bg">
+
+        <!-- Upper Navigation bar -->
+        <header id="navbar" class= "primary-header flex">
+            <div>
+                <a href="/home">
+                    <img class="logo" src="./assets/meca_logo.png" alt="">
+                </a>
+            </div>
+
+            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false"></button>
+            <nav>
+                <ul id="primary-navigation" data-visible="false" class="primary-navigation flex">
+                    <li>
+                        <a class="text-darkblue font-merriweather font-nav" class="active" href="/home"> Accueil </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="loca_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Locations</a>
+                        <div id="loca_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/rental_list">Toutes les locations</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/rental_new">Nouvelle location</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="loc_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Locataires</a>
+                        <div class="dropdown_content" id="loc_dropable" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/client">Informations locataires</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/client_new">Nouveau client</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="inventory_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Inventaire</a>
+                        <div id="inventory_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/inventory_list">Listes d'outils</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/inventory_modify">Modifier</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="tools_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Outils</a>
+                        <div id="tools_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/info_members"> Info membres</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/tool_members">Gestion membres</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/credits"> Crédits</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <form action="/Research_locations_modify" method="post" class="flex search_bar">
+            <input type="recherche" placeholder="Champs de recherche" id="search"name="search">
+            <button class="button-blue button-free" type="submit">Rechercher</button>
+        </form>
+
+
+
+        <div class= "text-content bg-text font-merriweather position-relative center-box">
+           
+            <h1>Ajouter une location</h1>
+            <div class="flex center-button">
+                <form action='/add_tool' method="post">
+                    <button class="button-blue  add-button" type="submit">+</button>
+                </form>
+                <form action='/del_tool' method="post">
+                    <button class="button-blue  add-button" type="submit">-</button>
+                </form>
+
+            </div>
+                
+            <form action="/nouvelle_location" method="post">
+
+                <label class="align-left-22" for="outil">Outil :</label>
+                {{#add_selection}}
+                    <select class="tool_select" name="tool" id="tool">
+                                {{#tool_list}}
+                                    <option value="{{name}}">{{name}}</option>
+                                {{/tool_list}}
+                    </select>
+                {{/add_selection}}
+                
+                <br/>
+                <a href="client_new" style="text-align: center; color: white; font-size: 130%; text-decoration: none;"> Nouveau Locataire ?</a>
+                <br>
+                <label for="locataire">Locataire :</label>
+                <select name="client" id="client">
+                    {{#listclients}}
+                        <option value="{{surname}} {{firstname}}">{{surname}} {{firstname}}</option>
+                    {{/listclients}}
+                </select>
+                <br/>
+
+                <label class="align-left-03" for="membre">Membre :</label>
+                <select name="member" id="member">
+                    {{#listmembres}}
+                        <option value="{{name}}">{{name}}</option>
+                    {{/listmembres}}
+                </select>
+                <br/>
+
+                <label class="align-left-03" for="caution">Caution :</label>
+                <input type="text" id="caution" name="caution" >
+                <br/>
+
+                <label class="align-left-22" for="commentaire">Note :</label>
+                <input type="text" id="commentaire" name="commentaire" >
+                <br/>
+
+                <button class="button-blue  button" type="submit">Ajouter</button>
+            </form>
+        </div>
+
+
+        <table class="bg-text position-relative center-box">
+            <tr class="column_titles">
+                <th>Modifier</th>
+                <th>Locataire</th>
+                <th>Outil</th>
+                <th>Date</th>
+            </tr>
+                {{#rental_list}}
+                        <tr>
+                            <td  class="center">
+                                <form action="/delete_rental" method="post">
+                                        <button type="submit" class="button-blue add-button" name = "{{_id}}"><span>Retour</span></button>
+                                </form>
+                            </td>
+                            <td> {{name}}        </td>
+                            <td> {{tool}}        </td>
+                            <td> {{date}}        </td>
+                        </tr> 
+                {{/rental_list}}
+        </table>
+
+</body>
+</html>

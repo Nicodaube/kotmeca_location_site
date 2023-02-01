@@ -1,0 +1,17 @@
+SKELETON:
+	* Moved the "Retour" and "Supprimer" button to the left (client_new and rental_new)
+	* Deleted the unnecessary informations (client_new and rental_new pages)
+	* Added the <meta> in the head of all html pages to toggle the device change.
+	* Added the <a> "Nouveau Locataire ?" on the rental_new page
+
+STYLE:
+
+	* Improvements on the mobile version:
+		* Search button size set
+		* Mobile navbar EventListener for onclick events
+		* Modified the trigger of the mobile version from 35rem to 955px
+		* Changed the navbar button to 2.5 rem
+		* Set the body width to 200% to avoid overflows
+		* Disabled the blur in mobile version
+		* Setted the navbar fontsize to be function of the width of the screen
+	* Changed the font-size of the lists to 1.25rem

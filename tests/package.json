@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "jest": "^27.4.5",
+    "selenium": "^2.20.0",
+    "selenium-webdriver": "^4.1.0"
+  },
+  "name": "testproject",
+  "version": "1.0.0",
+  "main": "jest.test.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "verbose":true
+    },
+
+  "author": "vincent",
+  "license": "ISC",
+  "description": "tester le site"
+}

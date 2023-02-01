@@ -1,0 +1,13 @@
+{
+	"name": "Marteau",
+	"quantity": "3",
+	"price": "0.5",
+	"rented": "0",
+	"_id": "61c5cec1c69d20d7c98c0aa3"
+}{
+	"name": "Bleus de travail",
+	"quantity": "8",
+	"price": "5",
+	"rented": "0",
+	"_id": "61edbb222fba5c061e67f0c4"
+}

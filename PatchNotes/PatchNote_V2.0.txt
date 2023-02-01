@@ -1,0 +1,5 @@
+SKELETON:
+
+	* Adding Boxes for late rentals on the home page (not functional)
+	* Adding file input for profile pictures (not functional)
+

@@ -1,0 +1,15 @@
+SKELETON:
+
+	* Initialisation HTML pages
+STYLE:
+
+	* Intialisation CSS 
+	* Initialisation mobile CSS
+
+DATABASE:
+
+	* Initialisation MongoDB
+
+FONCTIONNALITES:
+
+	* Initialisation JS

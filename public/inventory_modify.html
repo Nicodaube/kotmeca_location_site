@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="navbar_button.js" defer></script>
+
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <title>Kot Méca Location</title>
+        <link rel="stylesheet" href="Main_style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    </head>
+
+    <!-- Page body -->
+    <body class ="inventory_bg common_bg">
+
+        <!-- Upper Navigation bar -->
+        <header id="navbar" class= "primary-header flex">
+            <div>
+                <a href="/home">
+                    <img class="logo" src="./assets/meca_logo.png" alt="">
+                </a>
+            </div>
+
+            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false"></button>
+            <nav>
+                <ul id="primary-navigation" data-visible="false" class="primary-navigation flex">
+                    <li>
+                        <a class="text-darkblue font-merriweather font-nav" class="active" href="/home"> Accueil </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="loca_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Locations</a>
+                        <div id="loca_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/rental_list">Toutes les locations</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/rental_new">Nouvelle location</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="loc_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Locataires</a>
+                        <div class="dropdown_content" id="loc_dropable" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/client">Informations locataires</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/client_new">Nouveau client</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="inventory_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Inventaire</a>
+                        <div id="inventory_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/inventory_list">Listes d'outils</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/inventory_modify">Modifier</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="tools_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Outils</a>
+                        <div id="tools_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/info_members"> Info membres</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/tool_members">Gestion membres</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/credits"> Crédits</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <form action="/Research_inventory_modify" method="post" class="flex search_bar">
+            <input type="recherche" placeholder="Recherche" id="search"name="search">
+            <button class="button-blue button-free" type="submit">Rechercher</button>
+        </form>
+
+        <form action="/inventory_modify" method="post">
+
+            <div class= "text-content bg-text font-merriweather position-relative center-box">
+
+                <h1>Ajouter un outil</h1>
+
+                <label class="align-left-22" for="Nom">Nom </label> 
+                <a href="https://www.youtube.com/watch?v=DCmh5fvgqq4&ab_channel=Zara616"> :  </a>
+                <input  type="text" id="Nom" name = "Nom" required>
+                <br/>
+                <label for="Quantité">Quantité :</label> 
+                <input type="text" id="Quantité" name = "Quantité" required>
+                <br/>
+                <label for="Prix/jour ">Prix/jour :</label> 
+                <input type="text" id="Prix" name = "Prix" required>
+                <br/>
+                <button class="button-blue button" type="submit">Ajouter</button>
+
+                
+
+            </div> 
+        </form>
+
+        <!-- table -->
+        <table class="bg-text position-relative center-box">
+            <tr class="column_titles">
+                <th>Nom</th>
+                <th>Quantité</th>
+                <th>Prix/Jour</th>
+                <th>Loués</th>
+                <th>Modifier</th>
+            </tr>
+                {{#inventory_list}}
+                        <tr>
+                            <td>
+                                {{name}} 
+                            </td>
+                            <td>
+                                {{quantity}}
+                            </td>
+                            <td>
+                                {{price}}
+                            </td>
+                            <td>
+                                {{rented}}
+                            </td>
+                            <td  class="center">
+                                <form action="/delete_tool" method="post">
+                                        <button type="submit" class="button-blue add-button" name = "{{name}}"><span>Supprimer</span></button>
+                                </form>
+                            </td>
+                        </tr> 
+                {{/inventory_list}}
+        </table>
+
+
+        
+</body>
+</html>

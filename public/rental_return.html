@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="navbar_button.js" defer></script>
+
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <title>Kot Méca Location</title>
+        <link rel="stylesheet" href="Main_style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    </head>
+
+    <!-- Page body -->
+    <body class ="rental_bg common_bg">
+
+        <!-- Upper Navigation bar -->
+        <header id="navbar" class= "primary-header flex">
+            <div>
+                <a href="/home">
+                    <img class="logo" src="./assets/meca_logo.png" alt="">
+                </a>
+            </div>
+
+            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false"></button>
+            <nav>
+                <ul id="primary-navigation" data-visible="false" class="primary-navigation flex">
+                    <li>
+                        <a class="text-darkblue font-merriweather font-nav" class="active" href="/home"> Accueil </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="loca_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Locations</a>
+                        <div id="loca_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/rental_list">Toutes les locations</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/rental_new">Nouvelle location</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="loc_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Locataires</a>
+                        <div class="dropdown_content" id="loc_dropable" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/client">Informations locataires</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/client_new">Nouveau client</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="inventory_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Inventaire</a>
+                        <div id="inventory_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/inventory_list">Listes d'outils</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/inventory_modify">Modifier</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" id="tools_drop" class=" text-darkblue font-merriweather font-nav dropbtn" data-expanded="false">Outils</a>
+                        <div id="tools_dropable" class="dropdown_content" expanded="false">
+                            <a class="text-darkblue font-merriweather font-nav" href="/info_members"> Info membres</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/tool_members">Gestion membres</a>
+                            <a class="text-darkblue font-merriweather font-nav" href="/credits"> Crédits</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class= "text-content bg-text font-merriweather position-relative center-box pos-top-30">
+            <p> Cette location ayant été effectuée le {{rental_date}} et étant revenu le {{return_date}}</p>
+            <p> Le prix de cette location s'élève à : {{price}}</p>
+
+
+            <form action="/real_price" method="post">
+                
+                <label  for="Prix">Prix perçu :</label>
+                <input type="number" step="0.5" min="0" id="Prix" name="Prix" required >
+                <button type="submit" class="button-blue button" name = "{{name}}"><span> Valider le retour </span></button>
+            </form>
+
+            
+        </div>
+        
+

@@ -1,0 +1,24 @@
+SKELETON:
+	* Added the box with the late rentals 
+	* Added the alternate box if there is no late rental
+	* Added the info_members page
+	* Added the poste field in tool members
+	* Renamed "Membres" to "Gestion membres"
+	* Added the profile picture on the info membres page and on the homage page
+
+STYLE:
+
+	* Added the h3 field used in info_members
+	* Added the fun on the home page
+	* Changed the arborescence of the files
+
+JAVASCRIPT :
+	
+	* Added the get and render for the info_members page
+	* Made the profile pictures functionnal
+	* Made the profile picture dissapear from the upload directory when the member is deleted
+
+MONGODB : 
+	
+	* Modified the insert Mongo for the members (added the poste field)
+	
